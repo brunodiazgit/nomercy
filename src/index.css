@@ -37,4 +37,23 @@ body{
 .item-box{
   height: 20rem;
   width: 15rem;
+  transition: transform 0.3s ease;
+}
+
+.item-box:hover{
+  transform: scale(1.2);
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+
+  .detail-container{
+    margin-top: 10rem;
+}
+
+.detail-info{
+  width: 50%;
 }

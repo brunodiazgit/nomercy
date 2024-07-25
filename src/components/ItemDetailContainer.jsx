@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
+import ItemDetail from "./ItemDetail"
+import Container from 'react-bootstrap/Container'
 
 function ItemDetailContainer(){
     let { id } = useParams()
@@ -22,9 +24,9 @@ function ItemDetailContainer(){
         fetchApi()
     }, [id])
     return(
-        <div>
+        <Container className="detail-container">
             <ItemDetail product={detail}/>
-        </div>
+        </Container>
     )
 }
 
