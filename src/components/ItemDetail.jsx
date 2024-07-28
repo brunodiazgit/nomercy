@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-
+import ItemCount from "./ItemCount"
 
 function ItemDetail({ product }) {
     return (
@@ -11,10 +11,10 @@ function ItemDetail({ product }) {
                 <h1 className=" ">{product.name}</h1>
                 <p className="">{product.description}</p>
                 <p className="">U$S {product.price}</p>
-                <label htmlFor="quantity" className="">
+                <label htmlFor="quantity" className="mb-3">
                     Quantity:
                 </label>
-                {/* <ItemCount product={product}/> */}
+                <ItemCount product={product} />
             </div>
         </div>
     )

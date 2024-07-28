@@ -31,7 +31,7 @@ function ItemListContainer() {
     }, [category])
 
     return (
-        <Container className="d-flex flex-wrap gap-4">
+        <Container className=" il-container d-flex flex-wrap gap-4">
             <ItemList products={products} />
         </Container>
     )

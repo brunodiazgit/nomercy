@@ -34,6 +34,10 @@ body{
   width: 85%;
 }
 
+.il-container{
+  margin-bottom: 5rem;
+}
+
 .item-box{
   height: 20rem;
   width: 15rem;
@@ -51,9 +55,84 @@ a{
 
 
   .detail-container{
-    margin-top: 10rem;
+    margin-top: 6rem;
+    margin-bottom: 8rem;
 }
 
 .detail-info{
   width: 50%;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-item{
+  width: 3rem;
+  height: 3rem;
+  border-radius: 5px;
+  border: 1px solid black;
+  display: flex;
+  text-align: center;
+}
+
+.qty-btn{
+  width: 1.5rem;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+.qty-btn:hover{
+  background-color: rgb(32, 32, 32);
+  color: white;
+}
+
+.atc-btn{
+  width: 15rem;
+  height: 3rem;
+  border-radius: 5px;
+  background-color: rgb(196, 164, 175);
+  border: none;
+}
+
+.cart-container{
+  margin-bottom: 5rem;
+}
+
+.checkoutbtn{
+  width: 15rem ;
+  height: 3rem;
+  border-radius: 5px;
+  background-color: rgb(235, 168, 193);
+  border: none;
+}
+
+.checkoutbtn:hover{
+  background-color: rgb(201, 139, 162);
+}
+
+.cart-item{
+  border: 1px solid gray;
+  width: 50rem;
+  height: 20rem;
+  border-radius: 12px;
+  position: relative;
+}
+
+.trashbtn{
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.footer{
+  background-color: rgb(24, 23, 23);
+  color: white;
+  height: 18rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

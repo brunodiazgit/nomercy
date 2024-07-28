@@ -10,7 +10,10 @@ export const CartProvider = ({ children }) => {
             const itemIndex = prevCart.findIndex(item => item.id === obj.id)
             if (itemIndex !== -1) {
                 const updatedCart = [...prevCart]
-                updatedCart[itemIndex].quantity += obj.quantity
+                updatedCart[itemIndex] = {
+                    ...updatedCart[itemIndex],
+                    quantity: updatedCart[itemIndex].quantity + obj.quantity
+                }
                 return updatedCart
             } else {
                 return [...prevCart, obj]
@@ -35,7 +38,7 @@ export const CartProvider = ({ children }) => {
     const getTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)
 
     return (
-        <cartContext.Provider value={{ cart, addToCart, updateCartQuantity, removeFromCart, setCart, totalQuantity, getTotal }}>
+        <cartContext.Provider value={{ cart, addToCart, updateCartQuantity, removeFromCart, totalQuantity, getTotal }}>
             {children}
         </cartContext.Provider>
     )
