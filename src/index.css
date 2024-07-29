@@ -97,6 +97,10 @@ input[type="number"]::-webkit-outer-spin-button {
   border: none;
 }
 
+.atc-btn:hover{
+  background-color: rgb(194, 130, 152);
+}
+
 .cart-container{
   margin-bottom: 5rem;
 }
@@ -125,6 +129,11 @@ input[type="number"]::-webkit-outer-spin-button {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
+}
+
+form{
+  margin-top: 3rem;
+  padding-bottom: 15rem;
 }
 
 .footer{
