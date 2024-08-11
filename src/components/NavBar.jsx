@@ -2,7 +2,8 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link } from 'react-router-dom'
-import CartWidget from './CartWidget'
+import CartWidget from './Cart/CartWidget'
+import Account from './Account'
 
 function NavBar() {
     return (
@@ -21,6 +22,7 @@ function NavBar() {
                                 <Nav.Link as={Link} to={'/maybelline/eyeliner'}>Eyeliner</Nav.Link>
                                 <Nav.Link as={Link} to={'/maybelline/lipstick'}>Lipstick</Nav.Link>
                             </Nav>
+                            <Account/>
                             <CartWidget/>
                         </Navbar.Collapse>
                     </Container>

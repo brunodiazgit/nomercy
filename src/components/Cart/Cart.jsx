@@ -1,4 +1,4 @@
-import { useCart } from "./context/CartContext"
+import { useCart } from "../context/CartContext"
 import CartItem from "./CartItem"
 import { Link } from "react-router-dom"
 
@@ -16,7 +16,7 @@ function Cart() {
                 </button>
             </Link> : <div style={{marginTop: "14rem", marginBottom: "14rem"}}className="d-flex flex-column justify-content-center align-items-center"><h1><b>The cart is empty</b></h1> <Link style={{textDecoration:"underline", color: "blue"}} to={'/'}>Go home</Link> </div>}
         </div>
-    );
+    )
 }
 
 export default Cart

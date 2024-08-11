@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useCart } from './context/CartContext'
+import { useCart } from '../context/CartContext'
 import { useState } from 'react'
 
 function ItemCount({ product }) {

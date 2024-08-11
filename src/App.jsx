@@ -1,12 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "./index.css"
 import NavBar from "./components/NavBar"
-import ItemListContainer from "./components/ItemListContainer"
+import ItemListContainer from "./components/ItemListContainer/ItemListContainer"
 import Hero from "./components/Hero"
-import ItemDetailContainer from "./components/ItemDetailContainer"
-import Cart from './components/Cart'
-import CheckoutForm from './components/CheckoutForm'
+import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer"
+import Cart from './components/Cart/Cart'
+import CheckoutContainer from './components/CheckoutContainer'
 import Footer from './components/Footer'
+import LoginContainer from './components/LoginContainer'
 
 import {
   Routes,
@@ -21,19 +22,22 @@ function App() {
   const isItemDetail = matchPath("/item/:id", location.pathname)
   const isCart = matchPath("/cart", location.pathname)
   const isChk = matchPath("/checkout", location.pathname)
+  const login = matchPath("/login", location.pathname)
 
   return (
     <>
-        <NavBar />
-        {!isItemDetail && !isCart && !isChk && <Hero />}
+        {!login && <NavBar />}
+        {!isItemDetail && !isCart && !isChk && !login && <Hero />}
         <Routes>
           <Route path="/" element={<ItemListContainer />} />
           <Route path="/maybelline/:category" element={<ItemListContainer />} />
           <Route path="/item/:id" element={<ItemDetailContainer />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<CheckoutForm />} />
+          <Route path="/checkout" element={<CheckoutContainer />} />
+          <Route path="/login" element={<LoginContainer />} />
+{/*           <Route path="/login" element={<SignUp />} /> */}
         </Routes>
-        {!isItemDetail && <Footer/>}
+        {!isItemDetail && !login && <Footer/>}
     </>
   )
 }

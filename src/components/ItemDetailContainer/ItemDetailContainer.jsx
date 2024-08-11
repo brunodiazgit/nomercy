@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import ItemDetail from "./ItemDetail"
 import Container from 'react-bootstrap/Container'
 
-function ItemDetailContainer(){
+function ItemDetailContainer() {
     let { id } = useParams()
     const [detail, setDetail] = useState([])
 
@@ -23,9 +23,9 @@ function ItemDetailContainer(){
         }
         fetchApi()
     }, [id])
-    return(
+    return (
         <Container className="detail-container">
-            <ItemDetail product={detail}/>
+            <ItemDetail product={detail} />
         </Container>
     )
 }

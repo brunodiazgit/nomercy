@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import ItemCount from "./ItemCount"
+import ItemCount from "../Cart/ItemCount"
 
 function ItemDetail({ product }) {
     return (
