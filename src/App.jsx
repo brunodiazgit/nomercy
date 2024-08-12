@@ -35,7 +35,6 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<CheckoutContainer />} />
           <Route path="/login" element={<LoginContainer />} />
-{/*           <Route path="/login" element={<SignUp />} /> */}
         </Routes>
         {!isItemDetail && !login && <Footer/>}
     </>

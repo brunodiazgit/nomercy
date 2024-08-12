@@ -12,7 +12,7 @@ function ItemListContainer() {
     useEffect(() => {
         const fetchApi = async () => {
             try {
-                let response;
+                let response
                 if (category) {
                     response = await fetch(`https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline&product_type=${category}`)
                 } else {

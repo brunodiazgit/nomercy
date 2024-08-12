@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const FormInput = ({ type, ph, name, value, onChange, htmlFor, id, className }) => {
+const FormInput = ({ type, ph, name, value, onChange, htmlFor, id, className}) => {
     return (
         <input
             type={type}
