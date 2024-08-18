@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import FormInput from "./FormInput"
 
 function CheckoutForm({handleSubmit, formValues, handleChange}){
     return(
@@ -10,26 +9,32 @@ function CheckoutForm({handleSubmit, formValues, handleChange}){
             </div>
             <form onSubmit={handleSubmit}>
                 <h1>NoMercy</h1>
-                <FormInput
+                <input
                     type='text'
-                    ph='Name'
+                    placeholder='Name'
                     name='name'
                     value={formValues.name}
                     onChange={handleChange}
+                    className="p-1"
+                    required
                 />
-                <FormInput
+                <input
                     type='email'
-                    ph='email@example.com'
+                    placeholder='email@example.com'
                     name='email'
                     value={formValues.email}
                     onChange={handleChange}
+                    className="p-1"
+                    required
                 />
-                <FormInput
+                <input
                     type='number'
-                    ph='Phone number'
+                    placeholder='Phone number'
                     name='phone'
                     value={formValues.phone}
                     onChange={handleChange}
+                    className="p-1"
+                    required
                 />
                 <button style={{marginLeft:"1rem"}} type="submit" className="atc-btn">Create order</button>
             </form>

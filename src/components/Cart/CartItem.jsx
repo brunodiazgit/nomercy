@@ -10,7 +10,7 @@ function CartItem({ item }) {
             <img src={item.image_link} alt={item.name} />
             <div className="d-flex flex-column align-items-center justify-content-center gap-3">
                 <h1 style={{ fontSize: "1.5rem" }}>{item.name}</h1>
-                <p style={{ fontSize: "1.5rem" }} className="text-center">U$S {item.price}</p>
+                <p style={{ fontSize: "1.5rem" }} className="text-center">USD {item.price}</p>
                 <div>
                     <button
                         onClick={() => updateCartQuantity(item.id, -1)}

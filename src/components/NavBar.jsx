@@ -4,8 +4,13 @@ import Navbar from 'react-bootstrap/Navbar'
 import { Link } from 'react-router-dom'
 import CartWidget from './Cart/CartWidget'
 import Account from './Account'
+import { useAuth } from './context/AuthContext'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 function NavBar() {
+
+    const { isAuthenticated, user, logout } = useAuth()
+
     return (
         <>
             <header>
@@ -22,8 +27,20 @@ function NavBar() {
                                 <Nav.Link as={Link} to={'/maybelline/eyeliner'}>Eyeliner</Nav.Link>
                                 <Nav.Link as={Link} to={'/maybelline/lipstick'}>Lipstick</Nav.Link>
                             </Nav>
-                            <Account/>
-                            <CartWidget/>
+                            {isAuthenticated ?
+                                <>
+                                    <NavDropdown className="m-2" title={user.firstname} id="basic-nav-dropdown">
+                                        <NavDropdown.Item as={Link} to={'/orders'}>Orders</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={logout} >Logout</NavDropdown.Item>
+                                    </NavDropdown>
+                                    <CartWidget />
+                                </>
+                                :
+                                <>
+                                    <Account />
+                                    <CartWidget />
+                                </>
+                            }
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>

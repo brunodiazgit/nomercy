@@ -7,7 +7,8 @@ import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailCont
 import Cart from './components/Cart/Cart'
 import CheckoutContainer from './components/CheckoutContainer'
 import Footer from './components/Footer'
-import LoginContainer from './components/LoginContainer'
+import LoginContainer from './components/login/LoginContainer'
+import Orders from './components/Orders'
 
 import {
   Routes,
@@ -23,11 +24,12 @@ function App() {
   const isCart = matchPath("/cart", location.pathname)
   const isChk = matchPath("/checkout", location.pathname)
   const login = matchPath("/login", location.pathname)
+  const order = matchPath("/orders", location.pathname)
 
   return (
     <>
         {!login && <NavBar />}
-        {!isItemDetail && !isCart && !isChk && !login && <Hero />}
+        {!isItemDetail && !isCart && !isChk && !login && !order && <Hero />}
         <Routes>
           <Route path="/" element={<ItemListContainer />} />
           <Route path="/maybelline/:category" element={<ItemListContainer />} />
@@ -35,6 +37,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<CheckoutContainer />} />
           <Route path="/login" element={<LoginContainer />} />
+          <Route path="/orders" element={<Orders />} />
         </Routes>
         {!isItemDetail && !login && <Footer/>}
     </>

@@ -25,3 +25,30 @@ export const createOrder = async (req, res) => {
         })
     }
 }
+
+export const findOrders = async (req, res) => {
+    const {email} = req.params
+
+    try {
+        let orders = await Order.find({ email }).select({customerName:0, email: 0, phone: 0})
+        if(orders.length === 0){
+            return res.status(200).json({
+                status: "success",
+                message: "you have not made any orders",
+                orders: []
+            })
+        }
+        return res.status(200).json({
+            status: "success",
+            orders: orders
+        })
+
+    }catch(error){
+        return res.status(500).json({
+            status: "error",
+            message: "server error",
+            error: error.message
+        })
+    }
+
+}

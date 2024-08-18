@@ -1,5 +1,5 @@
-import FormInput from "./FormInput"
 import { useState } from "react"
+import { useAuth } from '../context/AuthContext'
 
 function Login() {
 
@@ -7,6 +7,8 @@ function Login() {
         email: "",
         password: ""
     })
+
+    const { login } = useAuth()
 
     const handleChange = (e) => {
         const { id, value } = e.target
@@ -29,6 +31,8 @@ function Login() {
             if (response.ok) {
                 const result = await response.json()
                 console.log('Login successful:', result)
+                localStorage.setItem('token', result.token)
+                login(result.token)
                 window.location.href = '/'
             }else{
                 console.log("the email or the password are wrong")
@@ -39,26 +43,28 @@ function Login() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className='d-flex flex-column align-items-center justify-content-center gap-4'>
+        <form onSubmit={handleSubmit} className='d-flex flex-column align-items-center justify-content-center gap-4 p-0'>
             <div className='d-flex flex-column'>
                 <label htmlFor="email">Email Address</label>
-                <FormInput
-                    className="input-login"
+                <input
+                    className="input-login p-2"
                     type='email'
-                    ph='   Enter email address'
+                    placeholder='Enter email address'
                     id='email'
                     onChange={handleChange}
+                    required
                 />
             </div>
 
             <div className='d-flex flex-column'>
                 <label htmlFor="password">Password</label>
-                <FormInput
-                    className="input-login"
+                <input
+                    className="input-login p-2"
                     type='password'
-                    ph='   Enter password'
+                    placeholder='Enter password'
                     id='password'
                     onChange={handleChange}
+                    required
                 />
             </div>
             <button className='loginbtn mt-3'>LOG IN</button>

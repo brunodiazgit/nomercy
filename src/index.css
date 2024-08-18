@@ -35,8 +35,8 @@ header{
 }
 
 .logo{
-  height: 25%;
-  width: 25%;
+  height: 35%;
+  width: 35%;
 }
 
 a{
@@ -233,6 +233,35 @@ form{
   display: flex;
   column-gap: 1rem;
 }
+
+.show-m{
+  background-color: rgb(36, 35, 35);
+  color: white;
+  width: 20rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 8px;
+}
+
+/* orders */
+
+.orders-logo{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 100%;
+}
+
+.orders-brand{
+  font-size: 10rem;
+  letter-spacing: 1rem;
+  color: rgba(39, 39, 39, 0.267);
+}
+
+
 /* --------------------------------------------- */
 
 

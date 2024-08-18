@@ -6,7 +6,7 @@ const key = "e8XWCIuiyp2Fk/c.hXXgB8S/ZKW5DIrEZ6L6bK"
 export const tokenGenerator = (user) => {
     const payload = {
         id: user._id,
-        name: user.name,
+        firstname: user.firstname,
         lastname: user.lastname,
         data: user.data,
         email: user.email,
