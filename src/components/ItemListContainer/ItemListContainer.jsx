@@ -2,11 +2,11 @@ import { useState, useEffect } from "react"
 import Container from 'react-bootstrap/Container'
 import ItemList from "./ItemList"
 import { useParams } from "react-router-dom"
-
+import Loader from "../Loader"
 
 function ItemListContainer() {
     const [products, setProducts] = useState([])
-
+    const [loading, setLoading] = useState(true)
     let { category } = useParams()
 
     useEffect(() => {
@@ -25,13 +25,19 @@ function ItemListContainer() {
                 setProducts(data)
             } catch (error) {
                 console.log("there was an error: " + error)
+            } finally {
+                setLoading(false)
             }
         }
         fetchApi()
     }, [category])
 
+    if(loading){
+        return <Loader loading={loading}/>
+    }
+
     return (
-        <Container className=" il-container d-flex flex-wrap gap-4">
+        <Container className="il-container">
             <ItemList products={products} />
         </Container>
     )

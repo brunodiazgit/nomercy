@@ -4,7 +4,6 @@ import SignupForm from './SignUpForm'
 
 function Signup() {
     const [message, setMessage] = useState('')
-
     const [formData, setFormData] = useState({
         firstname: '',
         lastname: '',

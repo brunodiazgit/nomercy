@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react"
 
-function ShowMessage({ message, onHide }) { // Acepta una función de callback `onHide`
+function ShowMessage({ message, onHide }) { 
     const [isVisible, setIsVisible] = useState(true)
 
     useEffect(() => {

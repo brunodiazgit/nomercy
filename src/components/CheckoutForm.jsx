@@ -5,7 +5,7 @@ function CheckoutForm({handleSubmit, formValues, handleChange}){
         <>
         <div className='d-flex flex-column justify-content-center align-items-center gap-3'>
                 <h1>Checkout</h1>
-                <h2 style={{fontSize: "5rem" , color: "rgb(177, 169, 169)"}}>Please fill in your details.</h2>
+                <h2 className="checkoutmessage">Please fill in your details.</h2>
             </div>
             <form onSubmit={handleSubmit}>
                 <h1>NoMercy</h1>
@@ -15,7 +15,7 @@ function CheckoutForm({handleSubmit, formValues, handleChange}){
                     name='name'
                     value={formValues.name}
                     onChange={handleChange}
-                    className="p-1"
+                    className="input-checkout"
                     required
                 />
                 <input
@@ -24,7 +24,7 @@ function CheckoutForm({handleSubmit, formValues, handleChange}){
                     name='email'
                     value={formValues.email}
                     onChange={handleChange}
-                    className="p-1"
+                    className="input-checkout"
                     required
                 />
                 <input
@@ -33,7 +33,7 @@ function CheckoutForm({handleSubmit, formValues, handleChange}){
                     name='phone'
                     value={formValues.phone}
                     onChange={handleChange}
-                    className="p-1"
+                    className="input-checkout"
                     required
                 />
                 <button style={{marginLeft:"1rem"}} type="submit" className="atc-btn">Create order</button>

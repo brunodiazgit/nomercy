@@ -3,7 +3,7 @@ import ItemCount from "../Cart/ItemCount"
 
 function ItemDetail({ product }) {
     return (
-        <div className="d-flex justify-content-center gap-5">
+        <div className="detail-item-box">
             <div>
                 <img className="" src={product.image_link} alt={product.name} />
             </div>

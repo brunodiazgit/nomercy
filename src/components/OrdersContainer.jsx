@@ -2,11 +2,12 @@ import { useEffect, useState } from "react"
 import Container from "react-bootstrap/Container"
 import { useAuth } from "./context/AuthContext"
 
-function Orders() {
+function OrdersContainer() {
     const [orders, setOrders] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     const { user, loading: authLoading } = useAuth()
+
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -49,8 +50,8 @@ function Orders() {
 
     return (
         <Container className="d-flex">
-            <div className="d-flex flex-column align-items-start">
-                <h2>Your Orders</h2>
+            <div className="orders-container">
+                <h2>Orders</h2>
                 {orders.length === 0 ? (
                     <p>No orders found.</p>
                 ) : (
@@ -84,4 +85,4 @@ function Orders() {
     )
 }
 
-export default Orders
+export default OrdersContainer

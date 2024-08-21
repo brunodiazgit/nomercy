@@ -1,6 +1,6 @@
 /* Reset */
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -10,44 +10,67 @@
 
 /* Globals */
 
-body{
+body {
   font-family: "Zain", sans-serif;
   font-weight: 300;
   font-style: normal;
   font-size: 1.3rem;
+  height: 100%;
 }
 
 /* ------------------------ */
 
 /* Header && Footer */
 
-header{
+header {
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-.bg-body-tertiary{
+.bg-body-tertiary {
   font-family: "Zain", sans-serif;
-  font-weight: 400;
+  font-weight: 600;
   font-style: normal;
   font-size: 1.7rem;
+  min-height: 11rem;
 }
 
-.logo{
-  height: 35%;
-  width: 35%;
+.me-auto {
+  margin: 3.5rem !important;
 }
 
-a{
+.navbar-brand {
+  padding: 0;
+  margin: 0;
+}
+
+.logo {
+  margin: 0;
+  font-size: 5rem;
+  letter-spacing: 0.5rem;
+}
+
+a {
   text-decoration: none;
   color: black;
 }
 
-.footer{
+.nav-link:hover {
+  color: rgb(219, 166, 175);
+}
+
+.cart-account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.footer {
   background-color: rgb(24, 23, 23);
   color: white;
-  height: 18rem;
+  height: 15rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -59,34 +82,44 @@ a{
 
 /* Home */
 
-.hero{
+.hero {
   width: 85%;
 }
 
-.il-container{
+.il-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
   margin-bottom: 5rem;
 }
 
-.item-box{
+.item-box {
   height: 20rem;
   width: 15rem;
   transition: transform 0.3s ease;
 }
 
-.item-box:hover{
-  transform: scale(1.2);
+.item-box:hover {
+  transform: scale(1.1);
 }
 
 /* ------------------------ */
 
 /* Detail */
 
-  .detail-container{
-    margin-top: 6rem;
-    margin-bottom: 8rem;
+.detail-container {
+  margin-top: 6rem;
+  margin-bottom: 8rem;
 }
 
-.detail-info{
+.detail-item-box {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.detail-info {
   width: 50%;
 }
 
@@ -96,7 +129,7 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.input-item{
+.input-item {
   width: 3rem;
   height: 3rem;
   border-radius: 5px;
@@ -105,18 +138,18 @@ input[type="number"]::-webkit-outer-spin-button {
   text-align: center;
 }
 
-.qty-btn{
+.qty-btn {
   width: 1.5rem;
   border-radius: 5px;
   border: 1px solid grey;
 }
 
-.qty-btn:hover{
+.qty-btn:hover {
   background-color: rgb(32, 32, 32);
   color: white;
 }
 
-.atc-btn{
+.atc-btn {
   width: 15rem;
   height: 3rem;
   border-radius: 5px;
@@ -124,7 +157,7 @@ input[type="number"]::-webkit-outer-spin-button {
   border: none;
 }
 
-.atc-btn:hover{
+.atc-btn:hover {
   background-color: rgb(194, 130, 152);
 }
 
@@ -132,11 +165,11 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* Cart && Checkout */
 
-.cart-container{
+.cart-container {
   margin-bottom: 5rem;
 }
 
-.cart-item{
+.cart-item {
   border: 1px solid gray;
   width: 50rem;
   height: 20rem;
@@ -144,59 +177,69 @@ input[type="number"]::-webkit-outer-spin-button {
   position: relative;
 }
 
-.checkoutbtn{
-  width: 15rem ;
+.checkoutmessage {
+  font-size: 5rem;
+  color: rgb(177, 169, 169);
+}
+
+.input-checkout {
+  padding: 0.4rem;
+}
+
+.checkoutbtn {
+  width: 15rem;
   height: 3rem;
   border-radius: 5px;
   background-color: rgb(235, 168, 193);
   border: none;
 }
 
-.checkoutbtn:hover{
+.checkoutbtn:hover {
   background-color: rgb(201, 139, 162);
 }
 
 
-.trashbtn{
+.trashbtn {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
 }
 
-form{
+form {
   margin-top: 3rem;
-  padding-bottom: 15rem;
+  margin-bottom: 15rem;
 }
 
 /* --------------------------------------------- */
 
 
 /* Login */
-.login-image-container{
+.login-image-container {
   height: 100vh;
-  overflow: hidden; 
-}
-.login-image-container img{
-  height: 100%;
-    width: auto; 
-    object-fit: cover; 
+  overflow: hidden;
 }
 
-.login-container{
+.login-image-container img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+}
+
+.login-container {
   height: 100%;
   width: 50%;
-  margin: 0;
+  margin: 0 2rem 0 2rem;
   padding: 0;
 }
 
-.input-login{
-  width: 20rem;
+.input-login {
+  width: 18rem;
   height: 3rem;
   border: 1px solid rgb(194, 188, 188);
   border-radius: 5px;
 }
 
-.loginbtn{
+.loginbtn {
   width: 20rem;
   height: 3rem;
   background: black;
@@ -205,7 +248,7 @@ form{
   border: none;
 }
 
-.switch-btn{
+.switch-btn {
   height: 2rem;
   width: 5rem;
   border-radius: 5px;
@@ -214,12 +257,12 @@ form{
   color: white;
 }
 
-.switch-btn:hover{
+.switch-btn:hover {
   background-color: rgb(201, 201, 201);
   color: black;
 }
 
-.signup{
+.signup {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -229,12 +272,12 @@ form{
   width: 100%;
 }
 
-.signup-input{
+.signup-input {
   display: flex;
   column-gap: 1rem;
 }
 
-.show-m{
+.show-m {
   background-color: rgb(36, 35, 35);
   color: white;
   width: 20rem;
@@ -248,26 +291,189 @@ form{
 
 /* orders */
 
-.orders-logo{
+.orders-logo {
   display: flex;
   justify-content: end;
   align-items: center;
   width: 100%;
 }
 
-.orders-brand{
+.orders-brand {
   font-size: 10rem;
   letter-spacing: 1rem;
   color: rgba(39, 39, 39, 0.267);
 }
 
+.orders-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+
+
+}
 
 /* --------------------------------------------- */
 
 
 /* Media Queries */
 
+@media screen and (max-width: 1400px) {
+  .me-auto {
+    margin: 1.5rem !important;
+  }
+}
 
 
+@media screen and (max-width: 1200px) {
+  .logo {
+    font-size: 3rem;
+  }
+
+  .me-auto {
+    margin: 1rem !important;
+  }
+
+  .nav-link {
+    font-size: 1.5rem;
+  }
+
+  .model-img {
+    display: none;
+  }
+
+  .login-container {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .logo {
+    font-size: 5rem;
+  }
+
+  .detail-container {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+
+  .cart-item {
+    width: 40rem;
+    padding: 2rem;
+  }
+
+  .cart-account {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 5rem;
+  }
+
+  .input-checkout {
+    width: 20rem;
+  }
+
+  .checkoutmessage {
+    font-size: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .detail-item-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .detail-item-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .detail-container {
+    margin-bottom: 5rem;
+  }
+
+  .detail-info {
+    width: 80%;
+  }
+
+  .cart-item {
+    width: 30rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .logo {
+    font-size: 4rem;
+    margin-left: 1rem;
+  }
+
+  .cart-item {
+    width: 20rem;
+    height: 32rem;
+    padding: 2rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .signup-input {
+    flex-direction: column;
+  }
+
+  .checkoutmessage {
+    font-size: 2.5rem;
+  }
+
+  .input-checkout {
+    width: 20rem;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .logo {
+    font-size: 2.3rem;
+  }
+
+  .cart-item {
+    width: 16rem;
+    height: 34rem;
+  }
+
+  form {
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+  }
+}
+
+
+@media screen and (max-width: 375px) {
+  .input-login {
+    width: 15rem;
+  }
+
+  .loginbtn {
+    width: 15rem;
+  }
+
+  .checkoutmessage {
+    font-size: 2rem;
+  }
+
+  .input-checkout {
+    width: 15rem;
+  }
+}
 
 /* --------------------------------------------- */
