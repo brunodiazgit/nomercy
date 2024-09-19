@@ -8,7 +8,7 @@ import CheckoutForm from './CheckoutForm'
 const MySwal = withReactContent(Swal)
 
 function CheckoutContainer() {
-    const { setCart, cart, getTotal } = useCart()
+    const { setCart } = useCart()
     const navigate = useNavigate()
 
     const [formValues, setFormValues] = useState({
@@ -28,7 +28,7 @@ function CheckoutContainer() {
     const handleSubmit = async (e) => {
         e.preventDefault()  
         try {
-            const response = await fetch('http://localhost:3900/api/orders/create', {
+/*             const response = await fetch('http://localhost:3900/api/orders/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ function CheckoutContainer() {
     
             if (!response.ok) {
                 throw new Error('Error en la solicitud');
-            }
+            } */
     
             MySwal.fire({
                 title: <p>Order Created</p>,

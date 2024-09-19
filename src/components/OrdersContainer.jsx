@@ -46,7 +46,7 @@ function OrdersContainer() {
     }, [user, authLoading])
 
     if (loading) return <div>Loading...</div>
-    if (error) return <div>{error}</div>
+    if (error) return <div className="text-center">{error}</div>
 
     return (
         <Container className="d-flex">

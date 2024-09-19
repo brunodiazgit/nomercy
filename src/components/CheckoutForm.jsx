@@ -7,7 +7,7 @@ function CheckoutForm({handleSubmit, formValues, handleChange}){
                 <h1>Checkout</h1>
                 <h2 className="checkoutmessage">Please fill in your details.</h2>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form className="checkout-form" onSubmit={handleSubmit}>
                 <h1>NoMercy</h1>
                 <input
                     type='text'

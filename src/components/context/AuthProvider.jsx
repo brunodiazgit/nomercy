@@ -13,8 +13,8 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem('token')
         if (token) {
             try {
-                const decodedToken = jwtDecode(token);
-                const currentTime = Date.now() / 1000; // Convertir a segundos
+                const decodedToken = jwtDecode(token)
+                const currentTime = Date.now() / 1000
                 if (decodedToken.exp > currentTime) {
                     setIsAuthenticated(true)
                     setUser(decodedToken)  // Almacenar la información del usuario decodificada

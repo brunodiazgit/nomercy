@@ -7,7 +7,7 @@ import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailCont
 import Cart from './components/Cart/Cart'
 import CheckoutContainer from './components/CheckoutContainer'
 import Footer from './components/Footer'
-import LoginContainer from './components/login/LoginContainer'
+/* import LoginContainer from './components/login/LoginContainer' */
 import OrdersContainer from './components/OrdersContainer'
 
 import {
@@ -28,12 +28,12 @@ function App() {
     <>
         {!login && <NavBar />}
         <Routes>
-          <Route path="/" element={<><Hero/> <ItemListContainer /></>}/>
+          <Route path="/" element={<><Hero/><ItemListContainer /></>}/>
           <Route path="/maybelline/:category" element={<ItemListContainer />} />
           <Route path="/item/:id" element={<ItemDetailContainer />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<CheckoutContainer />} />
-          <Route path="/login" element={<LoginContainer />} />
+          {/* <Route path="/login" element={<LoginContainer />} /> */}
           <Route path="/orders" element={<OrdersContainer />} />
         </Routes>
         {!login && !cart && !isItemDetail && !orders && <Footer/>}

@@ -34,16 +34,16 @@ function Login() {
                 localStorage.setItem('token', result.token)
                 login(result.token)
                 window.location.href = '/'
-            }else{
+            } else {
                 console.log("the email or the password are wrong")
             }
-        } catch(error){
+        } catch (error) {
             console.error('Error:', error)
         }
     }
 
     return (
-        <form onSubmit={handleSubmit} className='d-flex flex-column align-items-center justify-content-center gap-4 p-0'>
+        <form onSubmit={handleSubmit} className='d-flex flex-column align-items-center justify-content-center gap-4 p-4'>
             <div className='d-flex flex-column'>
                 <label htmlFor="email">Email Address</label>
                 <input

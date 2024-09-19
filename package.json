@@ -16,7 +16,7 @@
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
     "estore": "file:",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "jwt-decode": "^4.0.0",
     "jwt-simple": "^0.5.6",
     "moment": "^2.30.1",
