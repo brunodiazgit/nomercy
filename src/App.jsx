@@ -29,6 +29,7 @@ function App() {
         {!login && <NavBar />}
         <Routes>
           <Route path="/" element={<><Hero/><ItemListContainer /></>}/>
+          <Route path="/nomercy" element={<><Hero /><ItemListContainer /></>} />
           <Route path="/maybelline/:category" element={<ItemListContainer />} />
           <Route path="/item/:id" element={<ItemDetailContainer />} />
           <Route path="/cart" element={<Cart />} />
