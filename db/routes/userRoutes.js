@@ -1,9 +1,12 @@
 import express from "express"
-import { register }from "../controller/userController.js"
-import {login} from "../controller/userController.js"
+import { prueba, register, login} from "../controller/userController.js"
 const router = express.Router()
 
-router.post("/register", register)
-router.post("/login", login )
 
-export default router
+export default (pool)=>{
+    router.get('/prueba', (req, res)=> prueba(req, res, pool))
+    router.post('/register', (req, res)=> register(req, res, pool))
+    router.post('/login', (req, res)=> login(req, res, pool))
+
+    return router
+}

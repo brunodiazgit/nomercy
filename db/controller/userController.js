@@ -1,96 +1,115 @@
-import User from "../models/userModel.js"
-import bcrypt from "bcrypt"
-import { tokenGenerator } from "../services/jwt.js"
+import bcrypt from "bcryptjs"
+import jwt from 'jsonwebtoken'
 
-export const register = async (req, res) => {
-    let { firstname, lastname, date, email, password } = req.body
+export const prueba = (req, res) => {
+    return res.status(200).json({
+        status: "success",
+        message: "The database is working fine"
+    })
+}
 
-    if (!firstname || !lastname || !date || !email || !password) {
-        return res.status(400).json({
-            status: "error",
-            message: "You must fill out the entire form ! ! !"
-        })
-    }
+// register users
+
+export const register = async (req, res, pool) => {
+    const { username, email, password } = req.body
+
     try {
-        const existingUsers = await User.find({ email: email.toLowerCase() })
-        if (existingUsers && existingUsers.length >= 1) {
-            return res.status(200).json({
-                status: "success",
+        if (!username || !email || !password) {
+            return res.status(400).json({
+                status: "error",
+                message: "you need to fill in all the fields"
+            })
+        }
+
+        const queryuser = `SELECT * FROM USERS WHERE email = $1`
+
+        const existingUser = await pool.query(queryuser, [email])
+
+        if (existingUser.rows.length > 0) {
+            return res.status(404).json({
+                status: "error",
                 message: "you already have an account"
             })
         }
 
-        let pwd = await bcrypt.hash(password, 10)
-        password = pwd
+        const hashedPassword = await bcrypt.hash(password, 10)
 
-        let userToSave = new User({
-            firstname,
-            lastname,
-            date,
-            email,
-            password
-        })
+        const userData = `INSERT INTO USERS(username, email, user_password)
+        VALUES($1,$2,$3) RETURNING*`
 
-        let savedUser = await userToSave.save()
+        const newUser = await pool.query(userData, [username, email, hashedPassword])
 
         return res.status(200).json({
             status: "success",
-            message: "A new user has been registered ! ! !",
-            savedUser
+            message: "An account has been successfully created",
+            user: newUser.rows[0]
         })
+
     } catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "server error ! ! !",
-            error
+            message: "internal server error ! ! !",
+            error: error.message
         })
     }
 }
 
-export const login = async (req, res) => {
-    let { email, password } = req.body
+// login users 
 
-    if (!email || !password) {
-        return res.status(500).json({
-            status: "error",
-            message: "You must fill out the entire form ! ! ! ! !"
-        })
-    }
+export const login = async (req, res, pool) => {
+    const { email, password } = req.body
     try {
-        const user = await User.findOne({ email: email })
-
-        if (!user) {
-            return res.status(404).json({
-                status: "error",
-                message: "User doesn't exist."
-            })
-        }
-
-        let pwd = bcrypt.compareSync(password, user.password)
-
-        if (!pwd) {
+        if (!email || !password) {
             return res.status(400).json({
                 status: "error",
-                message: "the password is wrong"
+                message: "you need to fill in all the fields"
             })
         }
 
-        const token = await tokenGenerator(user)
+        const query = `SELECT * FROM USERS WHERE email = $1`
+        const userResult = await pool.query(query, [email])
+
+        if (!userResult) {
+            return res.status(404).json({
+                status: "error",
+                message: "No user is registered with this email."
+            })
+        }
+
+        const user = userResult.rows[0]
+
+        const isPasswordValid = await bcrypt.compare(password, user.user_password)
+
+        if (!isPasswordValid) {
+            return res.status(400).json({
+                status: "error",
+                message: "Email or password is wrong ."
+            })
+        }
+
+        //generating token
+
+        const token = jwt.sign(
+            {id: user.id, name: user.username, email: user.email, role: user.user_role},
+            'QKDSAPKGP$!6590_25137MNP',
+            { expiresIn: '8h' }
+        )
 
         return res.status(200).json({
             status: "success",
-            message: "you have logged into your account",
+            token: token,
             user: {
-                id: user._id,
-                name: user.firstname
-            },
-            token
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                role: user.user_role
+            }
         })
 
     } catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "server error ! ! !",
+            message: "internal server error ! ! !",
             error: error.message
         })
     }
