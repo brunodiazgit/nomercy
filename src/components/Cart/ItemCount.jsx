@@ -1,17 +1,13 @@
 /* eslint-disable react/prop-types */
-import { useCart } from '../context/CartContext'
+/* import { useCart } from '../context/CartContext' */
 import { useState } from 'react'
+import { useCart } from '../context/CartContext'
 
 function ItemCount({ product }) {
+    const { addToCart } = useCart()
     const [quantity, setQuantity] = useState(1)
-    const { addToCart} = useCart()
-    
-    const handleAddToCart = () => {
-        if (quantity > 0) {
-            addToCart({ ...product, quantity })
-            setQuantity(1)
-        }
-    }
+
+
 
     const handleInputValue = e => {
         const value = parseInt(e.target.value, 10)
@@ -24,6 +20,11 @@ function ItemCount({ product }) {
 
     const decrementQuantity = () => {
         setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1))
+    }
+
+    const handleAddToCart = () => {
+        addToCart(product, quantity)
+        setQuantity(1)
     }
 
     return (

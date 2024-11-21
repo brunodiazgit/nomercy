@@ -21,7 +21,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch('http://localhost:3900/api/user/login', {
+            const response = await fetch('http://localhost:4100/api/user/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ function Login() {
                 console.log('Login successful:', result)
                 localStorage.setItem('token', result.token)
                 login(result.token)
-                window.location.href = '/'
+                window.location.href = '/nomercy/'
             } else {
                 console.log("the email or the password are wrong")
             }

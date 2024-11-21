@@ -2,8 +2,8 @@ import { Link } from "react-router-dom"
 
 function Account() {
     return (
-        <Link to={'/login'}>
-            <img style={{ height: "2rem", marginLeft: "1rem" }} src="../../../public/user-ICON.svg" alt="user icon" />
+        <Link to={'/nomercy/login'}>
+            <img style={{ height: "2rem", marginLeft: "1rem" }} src={`${import.meta.env.BASE_URL}user-ICON.svg`} alt="user icon" />
         </Link>
     )
 }

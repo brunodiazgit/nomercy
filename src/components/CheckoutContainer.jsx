@@ -28,29 +28,22 @@ function CheckoutContainer() {
     const handleSubmit = async (e) => {
         e.preventDefault()  
         try {
-/*             const response = await fetch('http://localhost:3900/api/orders/create', {
+            const response = await fetch('http://localhost:4100/api/orders/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     customerName: formValues.name,
                     email: formValues.email,
                     phone: formValues.phone,
-                    items: cart.map(item => ({
-                        id: item.id, 
-                        brand: item.brand,
-                        name: item.name,
-                        price: item.price,
-                        quantity: item.quantity
-                    })),
-                    totalAmount: getTotal
                 }),
             })
     
             if (!response.ok) {
                 throw new Error('Error en la solicitud');
-            } */
+            }
     
             MySwal.fire({
                 title: <p>Order Created</p>,

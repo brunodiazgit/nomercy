@@ -1,78 +1,30 @@
-import { useEffect, useState } from "react"
 import Container from "react-bootstrap/Container"
-import { useAuth } from "./context/AuthContext"
+import { useCart } from "./context/CartContext"
 
 function OrdersContainer() {
-    const [orders, setOrders] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-    const { user, loading: authLoading } = useAuth()
-
-
-    useEffect(() => {
-        const fetchOrders = async () => {
-            if (authLoading) return // Espera a que termine la autenticación
-            if (!user) {
-                setError("User not authenticated")
-                setLoading(false)
-                return
-            }
-
-            try {
-                const response = await fetch(`http://localhost:3900/api/orders/find/${user.email}`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                        'Content-Type': 'application/json',
-                    }
-                })
-
-                if (!response.ok) {
-                    throw new Error("Failed to fetch orders")
-                }
-
-                const data = await response.json()
-                setOrders(data.orders)
-                console.log(data.orders)
-            } catch (error) {
-                setError('Failed to fetch orders')
-                console.error('Error fetching orders:', error)
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        fetchOrders()
-    }, [user, authLoading])
-
-    if (loading) return <div>Loading...</div>
-    if (error) return <div className="text-center">{error}</div>
+    const { orders } = useCart()
 
     return (
         <Container className="d-flex">
             <div className="orders-container">
-                <h2>Orders</h2>
+                <h2 className="orders">ORDERS</h2>
                 {orders.length === 0 ? (
                     <p>No orders found.</p>
                 ) : (
                     orders.map((order) => (
-                        <div key={order._id} className="order-item">
-                            <h3 className="">Order ID: {order._id}</h3>
-                            <p>Created At: {new Date(order.orderDate).toLocaleDateString()}</p>
-                            <p>Total Amount: USD {order.totalAmount.toFixed(2)}</p>
+                        <div key={order.order_id} className="order-item">
+                            <h3>Order ID: {order.order_id}</h3>
+                            <h3>Created At: {order.date}</h3>
                             <div className="items">
-                                {order.items.length === 0 ? (
-                                    <p>No items in this order.</p>
-                                ) : (
-                                    order.items.map((item) => (
-                                        <div key={item.id} className="item">
-                                            <p>Item: {item.name}</p>
-                                            <p>Quantity: {item.quantity}</p>
-                                            <p>Price: USD   {item.price.toFixed(2)}</p>
-                                            <hr />
-                                        </div>
-                                    ))
-                                )}
+                                {order.details.map((detail) => (
+                                    <div key={detail.product_id}>
+                                        <p><b>Product Name: </b>{detail.product_name}</p>
+                                        <p><b>Quantity: </b> {detail.quantity}</p>
+                                        <p><b>Price USD </b> {detail.price}</p>
+                                    </div>
+                                ))}
+                                <p><b>Total USD </b>{order.total}</p>
+                                <hr />
                             </div>
                         </div>
                     ))

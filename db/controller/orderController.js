@@ -54,3 +54,59 @@ export const createOrder = async (req, res, pool) => {
         })
     }
 }
+
+// HOW TO GET ORDERS WITH ITS DETAILS
+export const getOrdersWithDetails = async (req, res, pool) => {
+    const customer_id = req.user.id
+
+    try {
+        const query = `
+            SELECT o.id AS order_id, o.order_date, o.total, od.product_id, od.quantity, od.price, p.name AS product_name
+            FROM ORDERS o
+            LEFT JOIN ORDERDETAILS od ON o.id = od.order_id
+            LEFT JOIN PRODUCTS p ON od.product_id = p.id
+            WHERE o.customer_id = $1
+        `
+
+        const result = await pool.query(query, [customer_id])
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                status: "error",
+                message: "No orders found",
+            })
+        }
+
+        // Agrupar los resultados por orden
+        const orders = {}
+        result.rows.forEach((row) => {
+            if (!orders[row.order_id]) {
+                orders[row.order_id] = {
+                    order_id: row.order_id,
+                    date: row.order_date,
+                    total: row.total,
+                    details: [],
+                }
+            }
+
+            orders[row.order_id].details.push({
+                product_id: row.product_id,
+                product_name: row.product_name,
+                quantity: row.quantity,
+                price: row.price,
+            })
+        })
+
+        return res.status(200).json({
+            status: "success",
+            orders: Object.values(orders),
+        })
+    } catch (error) {
+        res.status(500).json({
+            status: "error",
+            message: "Server internal error",
+            error: error.message,
+        })
+    }
+}
+

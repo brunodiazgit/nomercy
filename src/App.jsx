@@ -7,37 +7,38 @@ import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailCont
 import Cart from './components/Cart/Cart'
 import CheckoutContainer from './components/CheckoutContainer'
 import Footer from './components/Footer'
-/* import LoginContainer from './components/login/LoginContainer' */
+import LoginContainer from './components/login/LoginContainer'
 import OrdersContainer from './components/OrdersContainer'
 
 import {
   Routes,
   Route,
   useLocation,
-  matchPath 
+  matchPath
 } from "react-router-dom";
 
 
 function App() {
   const location = useLocation()
-  const isItemDetail = matchPath("/item/:id", location.pathname)
-  const login = matchPath("/login", location.pathname)
-  const cart = matchPath("/cart", location.pathname)
-  const orders = matchPath("/orders", location.pathname)
+  const isItemDetail = matchPath("/nomercy/item/:id", location.pathname)
+  const login = matchPath("/nomercy/login", location.pathname)
+  const cart = matchPath("/nomercy/cart", location.pathname)
+  const orders = matchPath("/nomercy/orders", location.pathname)
+
   return (
     <>
-        {!login && <NavBar />}
-        <Routes>
-          <Route path="/" element={<><Hero/><ItemListContainer /></>}/>
-          <Route path="/nomercy" element={<><Hero /><ItemListContainer /></>} />
-          <Route path="/maybelline/:category" element={<ItemListContainer />} />
-          <Route path="/item/:id" element={<ItemDetailContainer />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<CheckoutContainer />} />
-          {/* <Route path="/login" element={<LoginContainer />} /> */}
-          <Route path="/orders" element={<OrdersContainer />} />
-        </Routes>
-        {!login && !cart && !isItemDetail && !orders && <Footer/>}
+      {!login && <NavBar />}
+      <Routes>
+        <Route path="/nomercy" element={<><Hero /><ItemListContainer /></>} />
+        <Route path="/nomercy/category/:category" element={<ItemListContainer />} />
+        <Route path="/nomercy/product/:id" element={<ItemDetailContainer />} />
+        <Route path="/nomercy/cart" element={<Cart />} />
+        <Route path="/nomercy/checkout" element={<CheckoutContainer />} />
+        <Route path="/nomercy/login" element={<LoginContainer />} />
+        <Route path="/nomercy/orders" element={<OrdersContainer />} />
+      </Routes>
+
+      {!login && !cart && !isItemDetail && !orders && <Footer />}
     </>
   )
 }

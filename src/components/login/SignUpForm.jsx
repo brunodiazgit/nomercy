@@ -6,43 +6,19 @@ function SignupForm({handleSubmit, handleChange, formData}) {
             <form onSubmit={handleSubmit} className='signup p-0'>
                 <div className="signup-input">
                     <div className='d-flex flex-column'>
-                        <label htmlFor="firstname">First Name</label>
+                        <label htmlFor="username">First Name</label>
                         <input
                             className="input-login p-2"
                             type='text'
                             placeholder='Enter first name'
-                            id='firstname'
-                            value={formData.firstname}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className='d-flex flex-column'>
-                        <label htmlFor="lastname">Last Name</label>
-                        <input
-                            className="input-login p-2"
-                            type='text'
-                            placeholder='Enter last name'
-                            id='lastname'
-                            value={formData.lastname}
+                            id='username'
+                            value={formData.username}
                             onChange={handleChange}
                             required
                         />
                     </div>
                 </div>
                 <div className="signup-input">
-                    <div className='d-flex flex-column'>
-                        <label htmlFor="date">Date of Birth</label>
-                        <input
-                            className="input-login p-2"
-                            type='date'
-                            placeholder='Select date'
-                            id='date'
-                            value={formData.date}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
                     <div className='d-flex flex-column'>
                         <label htmlFor="email">Email Address</label>
                         <input

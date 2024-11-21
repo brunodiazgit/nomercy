@@ -41,17 +41,35 @@ export const addToCart = async (req, res, pool) => {
 // HOW TO GET ALL THE PRODUCTS INTO THE CART 
 
 export const getCart = async (req, res, pool) => {
-    const  customer_id  = req.user.id
+    const customer_id = req.user.id
 
     try {
-
-        const cartQuery = `SELECT * FROM CART WHERE customer_id = $1`
-
+        // Retrieve cart items along with their prices
+        const cartQuery = `
+            SELECT CART.product_id, CART.quantity, PRODUCTS.price, PRODUCTS.image_link, PRODUCTS.name, (CART.quantity * PRODUCTS.price) AS item_total
+            FROM CART
+            JOIN PRODUCTS ON CART.product_id = PRODUCTS.id
+            WHERE CART.customer_id = $1
+        `
         const result = await pool.query(cartQuery, [customer_id])
+
+        if (result.rows.length === 0) {
+            return res.status(200).json({
+                status: "success",
+                message: "The cart is empty.",
+                cart: [],
+                total: 0
+            })
+        }
+
+        // Calculate the total of all items in the cart
+        const total = result.rows.reduce((acc, item) => acc + Number(item.item_total), 0)
+        
 
         return res.status(200).json({
             status: "success",
-            cart: result.rows
+            cart: result.rows,
+            total: parseFloat(total).toFixed(2)
         })
 
     } catch (error) {
@@ -128,4 +146,33 @@ export const editQuantity = async (req, res, pool) => {
             error: error.message
         })
     }
+}
+
+
+// CART'S QUANTITY
+
+export const cartQuantity = async(req, res, pool)=>{
+    const customer_id = req.user.id
+
+
+    try {
+        const query = `SELECT SUM(quantity) AS cartquantity FROM CART WHERE customer_id = $1`
+        
+        const result = await pool.query(query, [customer_id])
+
+        const cartquantity = result.rows[0].cartquantity || 0
+
+        return res.status(200).json({
+            status: "success",
+            cartQuantity: cartquantity
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            message: "server internal error",
+            error: error.message
+        })
+    }
+
 }

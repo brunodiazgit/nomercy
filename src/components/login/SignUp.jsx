@@ -5,9 +5,7 @@ import SignupForm from './SignUpForm'
 function Signup() {
     const [message, setMessage] = useState('')
     const [formData, setFormData] = useState({
-        firstname: '',
-        lastname: '',
-        date: '',
+        username: '',
         email: '',
         password: ''
     })
@@ -23,7 +21,7 @@ function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch('http://localhost:3900/api/user/register', {
+            const response = await fetch('http://localhost:4100/api/user/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,9 +32,7 @@ function Signup() {
                 const result = await response.json()
                 console.log('Registration successful:', result)
                 setFormData({
-                    firstname: '',
-                    lastname: '',
-                    date: '',
+                    username: '',
                     email: '',
                     password: ''
                 })
