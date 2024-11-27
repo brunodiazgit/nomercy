@@ -30,9 +30,6 @@ function OrdersContainer() {
                     ))
                 )}
             </div>
-            <div className="orders-logo">
-                <h1 className="orders-brand">NO MERCY</h1>
-            </div>
         </Container>
     )
 }

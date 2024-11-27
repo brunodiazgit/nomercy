@@ -6,9 +6,16 @@ import CartWidget from './Cart/CartWidget'
 import Account from './Account'
 import { useAuth } from './context/AuthContext'
 import Dropdown from 'react-bootstrap/Dropdown'
+import { useNavigate } from 'react-router-dom'
 
 function NavBar() {
     const { isAuthenticated, user, logout } = useAuth()
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        logout()
+        navigate('/nomercy/login') 
+    }
 
     return (
         <>
@@ -33,7 +40,7 @@ function NavBar() {
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
                                         <Dropdown.Item as={Link} to={'/nomercy/orders'}>My Orders</Dropdown.Item>
-                                        <Dropdown.Item onClick={logout}>Log out</Dropdown.Item>
+                                        <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                                 : <Account />

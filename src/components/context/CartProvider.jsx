@@ -2,33 +2,57 @@
 import { cartContext } from "./CartContext"
 import { useState, useEffect } from "react"
 
-
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
     const [cartQuantity, setCartQuantity] = useState(0)
     const [total, setTotal] = useState(0)
     const [orders, setOrders] = useState([])
+    const [message, setMessage] = useState("")
 
-    const fetchCart = async ()=>{
+    useEffect(() => {
+        fetchCartQuantity()
+    }, [])
+
+    const fetchCartQuantity = async () => {
         try {
-            const response =  await fetch('http://localhost:4100/api/cart/product',{
+            const response = await fetch('http://localhost:4100/api/cart/quantity', {
+                method: 'GET',
                 headers: {
-                    'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${localStorage.getItem('token')}`
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+
+            const data = await response.json()
+
+            if (response.ok) {
+                setCartQuantity(data.cartQuantity)
+            }
+        } catch (error) {
+            console.error("Error fetching cart quantity:", error)
+        }
+    }
+
+    const fetchCart = async () => {
+        try {
+            const response = await fetch('http://localhost:4100/api/cart/product', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
             if (!response.ok) {
                 throw new Error("Error fetching cart data")
             }
+
             const data = await response.json()
+
             setCart(data.cart)
             setTotal(Number(data.total).toFixed(2))
         } catch (error) {
             console.log("error: ", error)
         }
     }
-
-
 
     const addToCart = async (product, quantity) => {
         try {
@@ -43,136 +67,111 @@ export const CartProvider = ({ children }) => {
                     quantity: quantity
                 })
             })
-    
+
+            const addedItem = await response.json()
+
             if (response.ok) {
-                const addedItem = await response.json()
                 console.log('Producto añadido:', addedItem)
-    
+                setCartQuantity((prev) => prev + quantity)
             } else {
-                console.log('No se pudo añadir el producto')
+                setMessage("You must be logged in to use this feature")
             }
         } catch (error) {
             console.log(error)
         }
     }
-    
 
-
-    useEffect(()=>{
+    useEffect(() => {
         fetchCart()
-    },[])
+    }, [])
 
-    const updateProductQuantity = async(id, newQuantity) => {
-
+    const updateProductQuantity = async (product_id, newQuantity) => {
         try {
-            const response = await fetch('http://localhost:4100/api/cart/product',{
+            const response = await fetch('http://localhost:4100/api/cart/product', {
                 method: 'PUT',
-                headers:{
-                    'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${localStorage.getItem('token')}`
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
-                    product_id: id,
+                    product_id: product_id,
                     quantity: newQuantity
                 })
             })
 
             const data = await response.json()
 
-            if(response.ok){
+            if (response.ok) {
                 setCart((prevCart) => {
-                    return prevCart.map(item => 
-                        item.id === id ? { ...item, quantity: newQuantity } : item
+                    return prevCart.map(item =>
+                        item.product_id === product_id ? { ...item, quantity: newQuantity } : item
                     )
                 })
-            }  else {
+                const oldItem = cart.find(item => item.product_id === product_id)
+                const difference = newQuantity - oldItem.quantity
+                setCartQuantity(prev => prev + difference)
+            } else {
                 console.error(data.message)
             }
         } catch (error) {
             console.log(error)
         }
-
     }
 
-    const removeFromCart = async (id) => {
+    const removeFromCart = async (product_id) => {
         try {
-            const response = await fetch(`http://localhost:4100/api/cart/product`,{
+            const response = await fetch(`http://localhost:4100/api/cart/product`, {
                 method: 'DELETE',
-                headers:{
-                    'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${localStorage.getItem('token')}`
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
-                body: JSON.stringify({product_id: id})
+                body: JSON.stringify({ product_id: product_id })
             })
 
             const data = await response.json()
 
-            if(response.ok){
-                setCart((prevCart) => prevCart.filter(item => item.id !== id))
-
-            }  else {
+            if (response.ok) {
+                const removedItem = cart.find(item => item.product_id === product_id)
+                setCart((prevCart) => prevCart.filter(item => item.product_id !== product_id))
+                setCartQuantity((prev) => prev - removedItem.quantity)
+            } else {
                 console.error(data.message)
             }
-
         } catch (error) {
             console.log(error)
         }
-        
     }
-    useEffect(() => {
-        const fetchCartQuantity = async () => {
-            try {
-                const response = await fetch('http://localhost:4100/api/cart/quantity', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
-                })
-
-                if (!response.ok) {
-                    throw new Error("Error")
-                }
-
-                const data = await response.json()
-                if(data.status === 'success'){
-                    setCartQuantity(data.cartQuantity)
-                }
-            } catch (error) {
-                console.error("Error fetching cart quantity:", error)
-            } 
-        }
-        fetchCartQuantity()
-    }, [])
 
     useEffect(() => {
-        const fetchOrders = async () => {
-
-            try {
-                const response = await fetch(`http://localhost:4100/api/orders/details`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                    }
-                })
-
-                if (!response.ok) {
-                    throw new Error("Failed to fetch orders")
-                }
-
-                const data = await response.json()
-                setOrders(data.orders)
-            } catch (error) {
-                console.error('Error fetching orders:', error)
-            } 
-        }
-
         fetchOrders()
     }, [])
 
+    const fetchOrders = async () => {
+
+        try {
+            const response = await fetch(`http://localhost:4100/api/orders/details`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                }
+            })
+            if (!response.ok) {
+                throw new Error("Failed to fetch orders")
+            }
+            const data = await response.json()
+            setOrders(data.orders)
+        } catch (error) {
+            console.error('Error fetching orders:', error)
+        }
+    }
+
+
+
 
     return (
-        <cartContext.Provider value={{ cart, addToCart, setCart, updateProductQuantity, removeFromCart, cartQuantity, fetchCart, total, orders }}>
+        <cartContext.Provider value={{ cart, addToCart, setCart, updateProductQuantity, removeFromCart, cartQuantity, setCartQuantity, fetchCart, total, orders, fetchOrders, message }}>
             {children}
         </cartContext.Provider>
     )

@@ -3,10 +3,10 @@
 import { useState } from 'react'
 import { useCart } from '../context/CartContext'
 
-function ItemCount({ product }) {
-    const { addToCart } = useCart()
-    const [quantity, setQuantity] = useState(1)
 
+function ItemCount({ product }) {
+    const { addToCart, message } = useCart()
+    const [quantity, setQuantity] = useState(1)
 
 
     const handleInputValue = e => {
@@ -42,6 +42,7 @@ function ItemCount({ product }) {
                 <button onClick={incrementQuantity} className='qty-btn'>+</button>
             </div>
             <button onClick={handleAddToCart} className="atc-btn">Add to cart</button>
+            {message && <p style={{color: "red"}}>{message}</p>}
         </div>
     )
 }

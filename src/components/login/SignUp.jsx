@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import ShowMessage from './ShowMessage'
 import SignupForm from './SignUpForm'
 
 function Signup() {
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState("")
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -28,17 +27,20 @@ function Signup() {
                 },
                 body: JSON.stringify(formData)
             })
+
+            const result = await response.json()
+
             if (response.ok) {
-                const result = await response.json()
                 console.log('Registration successful:', result)
                 setFormData({
                     username: '',
                     email: '',
                     password: ''
                 })
+                setMessage(result.message)
                 setMessage("Your account has been created!")
             } else {
-                console.log('Registration failed')
+                setMessage(result.message)
             }
         } catch (error) {
             console.error('Error:', error)
@@ -47,8 +49,7 @@ function Signup() {
 
     return (
         <>
-            {message && <ShowMessage message={message} onHide={() => setMessage('')} />}
-            <SignupForm handleChange={handleChange} handleSubmit={handleSubmit} formData={formData}/>
+            <SignupForm handleChange={handleChange} handleSubmit={handleSubmit} formData={formData} message={message} />
         </>
     )
 }

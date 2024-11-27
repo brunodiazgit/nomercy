@@ -21,7 +21,9 @@ function ItemListContainer() {
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }
+
                 const data = await response.json()
+
                 setProducts(data.products)
             } catch (error) {
                 console.log("there was an error: " + error)
@@ -32,8 +34,8 @@ function ItemListContainer() {
         fetchApi()
     }, [category])
 
-    if(loading){
-        return <Loader loading={loading}/>
+    if (loading) {
+        return <Loader loading={loading} />
     }
 
     return (

@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs"
 import jwt from 'jsonwebtoken'
+import validator from 'validator'
 
 export const prueba = (req, res) => {
     return res.status(200).json({
@@ -18,6 +19,22 @@ export const register = async (req, res, pool) => {
             return res.status(400).json({
                 status: "error",
                 message: "you need to fill in all the fields"
+            })
+        }
+
+        //validator
+
+        if (!validator.isEmail(email)){
+            return res.status(400).json({
+                status: "error",
+                message: "The email is not valid"
+            })
+        }
+
+        if(!validator.isLength(password,{min: 8})){
+            return res.status(400).json({
+                status: "error",
+                message: "The password must be at least 8 characters long"
             })
         }
 
@@ -90,7 +107,7 @@ export const login = async (req, res, pool) => {
         //generating token
 
         const token = jwt.sign(
-            {id: user.id, name: user.username, email: user.email, role: user.user_role},
+            { id: user.id, name: user.username, email: user.email, role: user.user_role },
             'QKDSAPKGP$!6590_25137MNP',
             { expiresIn: '8h' }
         )

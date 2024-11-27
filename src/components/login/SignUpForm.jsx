@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 
-function SignupForm({handleSubmit, handleChange, formData}) {
+function SignupForm({ handleSubmit, handleChange, formData, message}) {
+
     return (
         <>
-            <form onSubmit={handleSubmit} className='signup p-0'>
+            <form onSubmit={handleSubmit} className='signup p-5'>
                 <div className="signup-input">
                     <div className='d-flex flex-column'>
                         <label htmlFor="username">First Name</label>
@@ -44,6 +45,7 @@ function SignupForm({handleSubmit, handleChange, formData}) {
                         required
                     />
                 </div>
+                {message && <p className="text-center" style={{color: "red"}}>{message}</p>}
                 <button className='loginbtn mt-3'>CREATE ACCOUNT</button>
             </form>
         </>

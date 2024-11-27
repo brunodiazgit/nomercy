@@ -16,17 +16,13 @@ body {
   font-style: normal;
   font-size: 1.3rem;
   height: 100%;
+  margin: 0;
 }
+
 
 /* ------------------------ */
 
 /* Header && Footer */
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
 
 .bg-body-tertiary {
   font-family: "Zain", sans-serif;
@@ -70,11 +66,14 @@ a {
 .footer {
   background-color: rgb(24, 23, 23);
   color: white;
-  height: 15rem;
+  height: 12.5rem;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  letter-spacing: 1px;
+}
+
+.footer-tag {
+  font-size: 4rem;
+  letter-spacing: 5px;
 }
 
 /* ------------------------ */
@@ -205,9 +204,11 @@ input[type="number"]::-webkit-outer-spin-button {
   right: 0.5rem;
 }
 
-.checkout-form {
-  margin-bottom: 15rem;
+.checkout-div {
+  margin: 5rem;
 }
+
+
 
 /* --------------------------------------------- */
 
@@ -290,22 +291,9 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* orders */
 
-.orders{
+.orders {
   font-size: 3rem;
   margin: 2rem;
-}
-
-.orders-logo {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  width: 100%;
-}
-
-.orders-brand {
-  font-size: 10rem;
-  letter-spacing: 1rem;
-  color: rgba(39, 39, 39, 0.267);
 }
 
 .orders-container {
@@ -360,8 +348,8 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .detail-container {
-    margin-top: 0rem;
-    margin-bottom: 0rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
   }
 
   .cart-item {
@@ -369,7 +357,7 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 2rem;
   }
 
-  .cartwidget{
+  .cartwidget {
     justify-content: start !important;
   }
 
@@ -392,6 +380,10 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .checkoutmessage {
     font-size: 3.5rem;
+  }
+
+  .checkout-div {
+    margin: 2rem;
   }
 }
 
@@ -421,7 +413,7 @@ input[type="number"]::-webkit-outer-spin-button {
   .cart-item {
     width: 30rem;
   }
-  
+
   .signup-input {
     flex-direction: column;
   }
@@ -449,6 +441,23 @@ input[type="number"]::-webkit-outer-spin-button {
   .input-checkout {
     width: 20rem;
   }
+
+  .footer {
+    font-size: 1.2rem;
+  }
+
+  .footer-tag {
+    font-size: 3rem;
+    letter-spacing: 5px;
+  }
+
+  .checkout-logo {
+    display: none !important;
+  }
+
+  .checkout-div {
+    margin: 0rem;
+  }
 }
 
 @media screen and (max-width: 420px) {
@@ -465,8 +474,17 @@ input[type="number"]::-webkit-outer-spin-button {
     margin-bottom: 3rem;
     margin-top: 1rem;
   }
-}
 
+  .footer {
+    height: 10rem;
+  }
+
+
+  .footer-tag {
+    font-size: 2rem;
+    letter-spacing: 5px;
+  }
+}
 
 @media screen and (max-width: 375px) {
   .input-login {

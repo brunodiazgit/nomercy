@@ -1,16 +1,15 @@
 /* eslint-disable react/prop-types */
 import { authContext } from "./AuthContext"
 import { useEffect, useState } from "react"
-import {jwtDecode} from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
 
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
-
     useEffect(() => {
-        // Comprobar si existe un token en el almacenamiento local
+        // checking if there is a token in the localstorage 
         const token = localStorage.getItem('token')
         if (token) {
             try {
@@ -18,7 +17,7 @@ export const AuthProvider = ({ children }) => {
                 const currentTime = Date.now() / 1000
                 if (decodedToken.exp > currentTime) {
                     setIsAuthenticated(true)
-                    setUser(decodedToken)  // Almacenar la información del usuario decodificada
+                    setUser(decodedToken)  // Saving the user's information 
                 } else {
                     localStorage.removeItem('token')
                 }

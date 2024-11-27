@@ -7,10 +7,9 @@ function Cart() {
     const { cart, fetchCart, total } = useCart()
     const location = useLocation()
 
-    
     useEffect(() => {
         if (location.pathname === "/nomercy/cart") {
-            fetchCart() 
+            fetchCart()
         }
     }, [location, fetchCart])
 
@@ -21,9 +20,9 @@ function Cart() {
             ))}
             {cart.length ? <Link to={'/nomercy/checkout'}>
                 <button className="checkoutbtn mt-5 mb-5">
-                Checkout USD {total} 
+                    Checkout USD {total}
                 </button>
-            </Link> : <div style={{marginTop: "14rem", marginBottom: "14rem"}}className="d-flex flex-column justify-content-center align-items-center"><h1><b>The cart is empty</b></h1> <Link style={{textDecoration:"underline", color: "blue"}} to={'/nomercy/'}>Go home</Link> </div>}
+            </Link> : <div style={{ marginTop: "14rem", marginBottom: "14rem" }} className="d-flex flex-column justify-content-center align-items-center"><h1><b>The cart is empty</b></h1> <Link style={{ textDecoration: "underline", color: "blue" }} to={'/nomercy/'}>Go home</Link> </div>}
         </div>
     )
 }

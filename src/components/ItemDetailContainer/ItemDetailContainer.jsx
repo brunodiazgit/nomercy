@@ -16,7 +16,9 @@ function ItemDetailContainer() {
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }
+
                 const data = await response.json()
+                
                 setDetail(data.product)
             } catch (e) {
                 console.log("there was an error: " + e)

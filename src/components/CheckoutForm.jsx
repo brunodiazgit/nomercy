@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 
-function CheckoutForm({handleSubmit, formValues, handleChange}){
-    return(
+function CheckoutForm({ handleSubmit, formValues, handleChange }) {
+    return (
         <>
-        <div className='d-flex flex-column justify-content-center align-items-center gap-3'>
+            <div className='d-flex flex-column justify-content-center align-items-center gap-3 m-5 checkout-logo'>
                 <h1>Checkout</h1>
                 <h2 className="checkoutmessage">Please fill in your details.</h2>
             </div>
-            <form className="checkout-form" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <h1>NoMercy</h1>
                 <input
                     type='text'
@@ -36,7 +36,7 @@ function CheckoutForm({handleSubmit, formValues, handleChange}){
                     className="input-checkout"
                     required
                 />
-                <button style={{marginLeft:"1rem"}} type="submit" className="atc-btn">Create order</button>
+                <button style={{ marginLeft: "1rem" }} type="submit" className="atc-btn">Create order</button>
             </form>
         </>
     )

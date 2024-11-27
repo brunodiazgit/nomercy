@@ -3,13 +3,13 @@ import { useState } from "react"
 import Signup from "./SignUp"
 
 function LoginContainer() {
-    const[change, setChange] = useState(false)
+    const [change, setChange] = useState(false)
 
-    const showSignup = ()=>{
+    const showSignup = () => {
         setChange(true)
     }
 
-    const showLogin = ()=>{
+    const showLogin = () => {
         setChange(false)
     }
 
@@ -19,12 +19,12 @@ function LoginContainer() {
                 <img src={`${import.meta.env.BASE_URL}model.png`} alt="model login" className="model-img" />
             </div>
             <div className="login-container d-flex flex-column align-items-center">
-                <img style={{width:'200px'}} className='logo pb-3' src={`${import.meta.env.BASE_URL}nomercy-logo.png`} alt="nomercy logo" />
+                <img style={{ width: '200px' }} className='logo pb-3' src={`${import.meta.env.BASE_URL}nomercy-logo.png`} alt="nomercy logo" />
                 <div className='d-flex gap-5'>
                     <button onClick={showLogin} className="switch-btn">LOG IN</button>
                     <button onClick={showSignup} className="switch-btn">SIGN UP</button>
                 </div>
-                {change ? <Signup/> : <Login/>}
+                {change ? <Signup /> : <Login />}
             </div>
         </div>
     )

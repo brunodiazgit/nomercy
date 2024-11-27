@@ -2,11 +2,12 @@ import { useState } from "react"
 import { useAuth } from '../context/AuthContext'
 
 function Login() {
-
+    const [error, setError] = useState("")
     const [formData, setFormData] = useState({
         email: "",
         password: ""
     })
+
 
     const { login } = useAuth()
 
@@ -28,14 +29,16 @@ function Login() {
                 },
                 body: JSON.stringify(formData)
             })
+
+            const result = await response.json()
+
             if (response.ok) {
-                const result = await response.json()
                 console.log('Login successful:', result)
                 localStorage.setItem('token', result.token)
                 login(result.token)
                 window.location.href = '/nomercy/'
             } else {
-                console.log("the email or the password are wrong")
+                setError(result.message)
             }
         } catch (error) {
             console.error('Error:', error)
@@ -66,6 +69,7 @@ function Login() {
                     onChange={handleChange}
                     required
                 />
+                {error && <p style={{ color: "red" }} className="text-center m-2 ">{error}</p>}
             </div>
             <button className='loginbtn mt-3'>LOG IN</button>
         </form>

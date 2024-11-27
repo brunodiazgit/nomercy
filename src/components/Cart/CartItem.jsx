@@ -12,7 +12,6 @@ function CartItem({ item }) {
         }
     }
 
-
     return (
         <div className="cart-item d-flex align-items-center justify-content-center gap-5">
             <img src={item.image_link} alt={item.name} />
@@ -40,4 +39,5 @@ function CartItem({ item }) {
         </div>
     )
 }
+
 export default CartItem

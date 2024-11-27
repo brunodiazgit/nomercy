@@ -8,7 +8,7 @@ import CheckoutForm from './CheckoutForm'
 const MySwal = withReactContent(Swal)
 
 function CheckoutContainer() {
-    const { setCart } = useCart()
+    const { setCart, setCartQuantity, fetchOrders } = useCart()
     const navigate = useNavigate()
 
     const [formValues, setFormValues] = useState({
@@ -26,13 +26,13 @@ function CheckoutContainer() {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()  
+        e.preventDefault()
         try {
             const response = await fetch('http://localhost:4100/api/orders/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization' : `Bearer ${localStorage.getItem('token')}`
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     customerName: formValues.name,
@@ -40,11 +40,11 @@ function CheckoutContainer() {
                     phone: formValues.phone,
                 }),
             })
-    
+
             if (!response.ok) {
-                throw new Error('Error en la solicitud');
+                throw new Error('Error en la solicitud')
             }
-    
+
             MySwal.fire({
                 title: <p>Order Created</p>,
                 text: "Your order has been successfully created!",
@@ -56,10 +56,12 @@ function CheckoutContainer() {
                     email: '',
                     phone: ''
                 });
-                setCart([]); 
-                navigate("/"); 
+                setCart([])
+                setCartQuantity(0)
+                navigate("/nomercy/")
+                fetchOrders()
             })
-        } catch (error) {           
+        } catch (error) {
             MySwal.fire({
                 title: <p>Error</p>,
                 text: error.message,
@@ -68,12 +70,13 @@ function CheckoutContainer() {
             })
         }
     }
+    
     return (
-        <div className="d-flex flex-column justify-content-center align-items-center">
+        <div className="d-flex flex-column justify-content-center align-items-center checkout-div">
             <CheckoutForm
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            formValues={formValues}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                formValues={formValues}
             />
         </div>
     )
