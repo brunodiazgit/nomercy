@@ -1,10 +1,15 @@
+/* eslint-disable no-undef */
+
 import express from "express"
 import cors from "cors"
 import pkg from "pg"
-import  userRoutes  from "./db/routes/userRoutes.js"
+import userRoutes from "./db/routes/userRoutes.js"
 import productsRoutes from "./db/routes/productsRoutes.js"
 import cartRoutes from "./db/routes/cartRoutes.js"
 import orderRoutes from "./db/routes/orderRoutes.js"
+import dotenv from "dotenv";
+
+dotenv.config()
 
 console.log("Starting Node app.")
 
@@ -19,13 +24,13 @@ app.use(express.json())
 // DATABASE 
 
 const { Pool } = pkg
-    
+
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'NoMercy',
-    password: 'Santana1!',
-    port: 5432,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
 })
 
 //ROUTES 

@@ -64,7 +64,6 @@ export const getCart = async (req, res, pool) => {
 
         // Calculate the total of all items in the cart
         const total = result.rows.reduce((acc, item) => acc + Number(item.item_total), 0)
-        
 
         return res.status(200).json({
             status: "success",
@@ -114,7 +113,6 @@ export const deleteCartProduct = async (req, res, pool) => {
     }
 }
 
-
 // HOW TO MODIFY THE PRODUCT'S QUANTITY
 
 export const editQuantity = async (req, res, pool) => {
@@ -148,16 +146,15 @@ export const editQuantity = async (req, res, pool) => {
     }
 }
 
-
 // CART'S QUANTITY
 
-export const cartQuantity = async(req, res, pool)=>{
+export const cartQuantity = async (req, res, pool) => {
     const customer_id = req.user.id
 
 
     try {
         const query = `SELECT SUM(quantity) AS cartquantity FROM CART WHERE customer_id = $1`
-        
+
         const result = await pool.query(query, [customer_id])
 
         const cartquantity = result.rows[0].cartquantity || 0
@@ -166,7 +163,7 @@ export const cartQuantity = async(req, res, pool)=>{
             status: "success",
             cartQuantity: cartquantity
         })
-        
+
     } catch (error) {
         return res.status(500).json({
             status: "error",

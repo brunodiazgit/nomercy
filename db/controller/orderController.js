@@ -3,7 +3,6 @@
 export const createOrder = async (req, res, pool) => {
     const customer_id = req.user.id
     try {
-        // Obtener productos del carrito junto con sus precios desde la tabla PRODUCTS
         const query = `
             SELECT CART.product_id, CART.quantity, PRODUCTS.price
             FROM CART
@@ -19,15 +18,13 @@ export const createOrder = async (req, res, pool) => {
             })
         }
 
-        // Calcular el total de la orden
         const total = cartItems.rows.reduce((acc, item) => acc + item.price * item.quantity, 0)
 
-        // Crear la orden en la tabla ORDERS
+
         const order = `INSERT INTO ORDERS (customer_id, order_date, total)
                        VALUES ($1, NOW(), $2) RETURNING *`
         const newOrder = await pool.query(order, [customer_id, total])
 
-        // Insertar detalles de la orden en ORDERDETAILS
         const orderId = newOrder.rows[0].id
         for (const item of cartItems.rows) {
             await pool.query(
@@ -36,7 +33,6 @@ export const createOrder = async (req, res, pool) => {
             )
         }
 
-        // Vaciar el carrito del usuario
         const cart = `DELETE FROM CART WHERE customer_id = $1`
         await pool.query(cart, [customer_id])
 
@@ -56,6 +52,7 @@ export const createOrder = async (req, res, pool) => {
 }
 
 // HOW TO GET ORDERS WITH ITS DETAILS
+
 export const getOrdersWithDetails = async (req, res, pool) => {
     const customer_id = req.user.id
 
@@ -77,7 +74,6 @@ export const getOrdersWithDetails = async (req, res, pool) => {
             })
         }
 
-        // Agrupar los resultados por orden
         const orders = {}
         result.rows.forEach((row) => {
             if (!orders[row.order_id]) {

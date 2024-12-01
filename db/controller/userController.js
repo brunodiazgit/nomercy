@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import bcrypt from "bcryptjs"
 import jwt from 'jsonwebtoken'
 import validator from 'validator'
@@ -9,7 +11,7 @@ export const prueba = (req, res) => {
     })
 }
 
-// register users
+// register 
 
 export const register = async (req, res, pool) => {
     const { username, email, password } = req.body
@@ -24,14 +26,14 @@ export const register = async (req, res, pool) => {
 
         //validator
 
-        if (!validator.isEmail(email)){
+        if (!validator.isEmail(email)) {
             return res.status(400).json({
                 status: "error",
                 message: "The email is not valid"
             })
         }
 
-        if(!validator.isLength(password,{min: 8})){
+        if (!validator.isLength(password, { min: 8 })) {
             return res.status(400).json({
                 status: "error",
                 message: "The password must be at least 8 characters long"
@@ -71,7 +73,7 @@ export const register = async (req, res, pool) => {
     }
 }
 
-// login users 
+// login 
 
 export const login = async (req, res, pool) => {
     const { email, password } = req.body
@@ -108,7 +110,7 @@ export const login = async (req, res, pool) => {
 
         const token = jwt.sign(
             { id: user.id, name: user.username, email: user.email, role: user.user_role },
-            'QKDSAPKGP$!6590_25137MNP',
+            process.env.JWT_SECRET,  
             { expiresIn: '8h' }
         )
 

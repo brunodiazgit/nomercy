@@ -24,8 +24,6 @@ export const getProducts = async (req, res, pool) => {
     }
 }
 
-
-
 // HOW TO GET A PRODUCT BY CATEGORY 
 
 export const getProductByCategory = async (req, res, pool) => {
@@ -55,7 +53,6 @@ export const getProductByCategory = async (req, res, pool) => {
         })
     }
 }
-
 
 //HOW TO GET A PRODUCT BY ID
 
@@ -87,28 +84,28 @@ export const getProductById = async (req, res, pool) => {
     }
 }
 
-// HOW TO CREATE A PRODUCT
+// Multer configuration
 
-// Verificar si el directorio 'uploads' existe, si no lo crea
 const uploadDirectory = 'uploads'
 
 if (!fs.existsSync(uploadDirectory)) {
-    fs.mkdirSync(uploadDirectory, { recursive: true }) // Crea el directorio si no existe
+    fs.mkdirSync(uploadDirectory, { recursive: true }) 
 }
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/') // El directorio donde se guardarán las imágenes
+        cb(null, 'uploads/') 
     },
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname)) // Nombre único para el archivo
+        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname)) 
     }
 })
 
 export const upload = multer({ storage: storage })
 
 
+// HOW TO CREATE A PRODUCT
 
 export const createProduct = async (req, res, pool) => {
     const { name, brand, price, description, product_type } = req.body
@@ -120,7 +117,7 @@ export const createProduct = async (req, res, pool) => {
         })
     }
 
-    const image_link = '/uploads/' + req.file.filename  // Generar el link de la imagen guardada
+    const image_link = '/uploads/' + req.file.filename  
 
     try {
         if (!name || !brand || !price || !description || !product_type) {
@@ -156,7 +153,6 @@ export const createProduct = async (req, res, pool) => {
         })
     }
 }
-
 
 // HOW TO MODIFY A PRODUCT
 
@@ -207,7 +203,6 @@ export const editProduct = async (req, res, pool) => {
         })
     }
 }
-
 
 // HOW TO DELETE A PRODUCT
 
